@@ -1,0 +1,22 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity deviseur is 
+port ( clkin :in std_logic;
+       clkout1 :out std_logic);
+
+end deviseur;
+architecture arch2 of deviseur is 
+signal clkout:std_logic:='0';
+begin 
+    process (clkin) 
+	 integer count :std_logic:= 0;
+    begin 
+	 if ( count < 500000)then 
+	 count := count +1;
+	 else count :=0;
+	      clkout<= not clkout; 
+	 end if ;
+	 end process;
+clkout1<=clkout;
+end arch2;	

@@ -1,0 +1,38 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity aff_complet  is 
+port (X1,X2,X3,X4 :in std_logic_vector(3 downto 0).
+      CLK:in std_logic;
+		c0,c1,c2,c3 :inout std_logic
+		y:out std_logic_vector(6 downto 0));
+end aff_complet  ;
+architecture arch5 of aff_complet is  
+component afficheur is 
+port ( X:in std_logic_vector(3 downto 0);
+       S:out std_logic_vector(6 downto 0));
+end component ;
+
+component  deviseur is 
+port ( clkin :in std_logic;
+       clkout1 :out std_logic);
+end component;
+
+component balayage is 
+port ( clk:in std_logic; 
+       sel : out std_logic_vector(1 downto 0);
+       AN0,AN1,AN2,AN3 :inout std_logic);
+end component;
+
+component  mux4_1 is 
+port (E1,E2,E3,E4 :in std_logic_vector(3 downto 0);
+      sel : in std_logic_vector(1 downto 0);
+	   S: out std_logic);
+end  component ;
+signal N:std_logic_vector(1 downto 0);
+signal K:std_logic;
+begin 
+u1:afficheur  port map(X,S);
+u2:deviseur   port map(CLK,K);
+u3:balayage   port map(K,N,c0,c1,c2,c3);
+u3:mux4_1     port map(X1,X2,X3,X4,N,y);

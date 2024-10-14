@@ -1,0 +1,24 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity mux4_1 is 
+port (E1,E2,E3,E4 :in std_logic_vector(3 downto 0);
+      sel : in std_logic_vector(1 downto 0);
+	   S: out std_logic);
+end  mux4_1;
+architecture arch4 of  mux4_1 is
+ 
+begin 
+	process (sel,E1,E2,E3,E4) 
+	begin 
+     case sel is 
+	  when "00" => S<=E1;
+	  when "01" => S<=E2;
+	  when "10" => S<=E3;
+	  when "11" => S<=E4;
+	  when others => null;
+	  end case;
+	end process;
+end arch4;
+
+ 

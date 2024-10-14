@@ -1,0 +1,28 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity balayage is 
+port ( clk:in std_logic; 
+       sel : out std_logic_vector(1 downto 0);
+       AN0,AN1,AN2,AN3 :inout std_logic);
+end balayage;
+architecture arch3 of deviseur is 
+begin 
+    process (clk)
+		 if (clkout1'event and clkout1='1') then 
+			  if(AN0='1' and AN1='0' and AN2='0' and AN3='0')then
+				  AN0<='1';
+				  sel<="00";
+			  elsif(AN0='0' and AN1='1' and AN2='0' and AN3='0')then
+				  AN1<='1';
+				  sel<="01";
+			  elsif(AN0='0' and AN1='0' and AN2='1' and AN3='0')then
+				  AN2<='1';
+				  sel<="10";
+			  elsif(AN0='0' and AN1='0' and AN2='0' and AN3='1')then
+					AN0<='1';
+					sel<="11";
+			  else null;
+		  end if;
+		end process;
+end arch3;
